@@ -41,10 +41,10 @@ Rock::Rock(const Rock & rhs) : Tool(rhs)
 **Arguments:
 **Returns:
 *********************************************************************/
-Rock::Rock(int rStrength, char rType)
+Rock::Rock(int rStrength)
 {
 	this->setStrength(rStrength);
-	this->setType(rType);
+	this->setType('r');
 }
 
 /*********************************************************************
@@ -52,10 +52,9 @@ Rock::Rock(int rStrength, char rType)
 **Arguments:
 **Returns:
 *********************************************************************/
-Rock & Rock::operator=(const Rock & rhs)
+void Rock::operator=(const Rock & rhs)
 {
 	Tool::operator=(rhs);
-	return *this;
 }
 
 /*********************************************************************
@@ -92,3 +91,4 @@ char Rock::fight(Tool & toolIn)
 
 	return outcome;
 }
+
