@@ -16,8 +16,8 @@ public:
 	Paper();
 	~Paper();
 	Paper(const Paper&);
-	Paper(int, char);
-	Paper &operator = (const Paper&);
+	Paper(int);
+	void operator = (const Paper&);
 	char fight(Tool&);
 };
 

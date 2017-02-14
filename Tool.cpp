@@ -18,15 +18,20 @@ Tool::Tool()
 	this->setType(' ');
 }
 
+Tool::Tool(int strengthIn) {
+	this->setStrength(strengthIn);
+	this->setType(' ');
+}
+
 /*********************************************************************
 **Description:
 **Arguments:
 **Returns:
 *********************************************************************/
-Tool::Tool(const Tool &RHS)
+Tool::Tool(const Tool &rhs)
 {
-	this->strength = RHS.strength;
-	this->type = RHS.type;
+	this->strength = rhs.getStrength();
+	this->type = rhs.getType();
 }
 
 /*********************************************************************
@@ -43,13 +48,12 @@ Tool::~Tool()
 **Arguments:
 **Returns:
 *********************************************************************/
-Tool & Tool::operator=(const Tool & RHS)
+void Tool::operator=(const Tool & rhs)
 {
-	if (&RHS != this) {
-		this->strength = RHS.strength;
-		this->type = RHS.type;
+	if (&rhs != this) {
+		this->strength = rhs.getStrength();
+		this->type = rhs.getType();
 	}
-	return *this;
 }
 
 /*********************************************************************
@@ -88,6 +92,26 @@ char Tool::getType()
 **Returns:
 *********************************************************************/
 int Tool::getStrength()
+{
+	return strength;
+}
+
+/*********************************************************************
+**Description:
+**Arguments:
+**Returns:
+*********************************************************************/
+char Tool::getType() const
+{
+	return type;
+}
+
+/*********************************************************************
+**Description:
+**Arguments:
+**Returns:
+*********************************************************************/
+int Tool::getStrength() const
 {
 	return strength;
 }

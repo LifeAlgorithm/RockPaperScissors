@@ -16,8 +16,8 @@ public:
 	Rock();
 	~Rock();
 	Rock(const Rock&);
-	Rock(int, char);
-	Rock &operator = (const Rock&);
+	Rock(int);
+	void operator = (const Rock&);
 	char fight(Tool&);
 };
 

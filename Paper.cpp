@@ -33,7 +33,7 @@ Paper::~Paper()
 **Returns:
 *********************************************************************/
 Paper::Paper(const Paper & rhs) : Tool(rhs)
-{	
+{
 }
 
 /*********************************************************************
@@ -41,10 +41,10 @@ Paper::Paper(const Paper & rhs) : Tool(rhs)
 **Arguments:
 **Returns:
 *********************************************************************/
-Paper::Paper(int pStrength, char pType)
+Paper::Paper(int pStrength)
 {
 	this->setStrength(pStrength);
-	this->setType(pType);
+	this->setType('p');
 }
 
 /*********************************************************************
@@ -52,10 +52,9 @@ Paper::Paper(int pStrength, char pType)
 **Arguments:
 **Returns:
 *********************************************************************/
-Paper & Paper::operator=(const Paper &rhs)
+void Paper::operator=(const Paper &rhs)
 {
 	Tool::operator=(rhs);
-	return *this;
 }
 
 /*********************************************************************
@@ -72,7 +71,7 @@ char Paper::fight(Tool &toolIn)
 	char outcome;
 
 	//Paper vs Rock
-	if (toolIn.getType() == 'r') { 
+	if (toolIn.getType() == 'r') {
 		tempPaperStrength *= 2; //paper is strong against rock, so strength is doubled
 		tempToolInStrength /= 2; //rock is weak to paper, so strength is halved
 		outcome = compareStrength(tempPaperStrength, tempToolInStrength); //compare
@@ -89,6 +88,7 @@ char Paper::fight(Tool &toolIn)
 	else {
 		outcome = compareStrength(tempPaperStrength, tempToolInStrength); //no temporary modifiers, compare
 	}
-	
+
 	return outcome;
 }
+
