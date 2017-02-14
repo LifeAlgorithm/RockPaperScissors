@@ -3,7 +3,7 @@
 Program: Project 2
 Author: Group 10
 Description: This is the scissor class that inherits
-from the virtual/super-class tool. This class 
+from the virtual/super-class tool. This class
 defines specific methods and attributes that are
 specific to the scissor functionality.
 
@@ -21,7 +21,7 @@ specific to the scissor functionality.
 
 Method: Scissor (constructor)
 Description: Calls the constructor from the public tool
-class and after initializing through inherited 
+class and after initializing through inherited
 constructor, changes the type member to 's'.
 
 ***********************************************/
@@ -36,7 +36,7 @@ Scissor::Scissor() : Tool()
 
 Method: Scissor (constructor)
 Description: Calls the constructor with a user-
-defined strength integer. Note that this is 
+defined strength integer. Note that this is
 inheriting code from the tool super-class.
 
 ***********************************************/
@@ -50,7 +50,7 @@ Scissor::Scissor(int str) : Tool(str)
 /***********************************************
 
 Method: Scissor (constructor)
-Description: Calls the constructor with a copy 
+Description: Calls the constructor with a copy
 of another scissor object. Note that this is
 inheriting code from the tool super-class
 
@@ -64,9 +64,9 @@ Scissor::Scissor(const Scissor &copy) : Tool(copy)
 /***********************************************
 
 Method: Scissor (destructor)
-Description: This is a virtual destructor by 
+Description: This is a virtual destructor by
 argument that a destructor in the future might have
-certain changes that require us to override 
+certain changes that require us to override
 functionality.
 
 ***********************************************/
@@ -122,9 +122,9 @@ char Scissor::fight(Tool &toolIn)
 	}
 
 	// Run the comparison
-	outcome = compareStrengths(tempScissorStr,
-								tempToolStr);
-	
+	outcome = compareStrength(tempScissorStr,
+		tempToolStr);
+
 	// Return variable
 	return outcome;
 }

@@ -3,7 +3,7 @@
 Program: Project 2
 Author: Group 10
 Description: This is the scissor class that inherits
-from the virtual/super-class tool. This class 
+from the virtual/super-class tool. This class
 defines specific methods and attributes that are
 specific to the scissor functionality.
 
