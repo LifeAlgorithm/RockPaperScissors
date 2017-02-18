@@ -1,72 +1,85 @@
 /**********************************************************************
-**Program Name:
-**Author:
-**Date:
-**Description:
+**Program Name:		RPS Game
+**Author:			Group 10
+**Date:				2/18/17
+**Description:		The Rock class implementation file
 **********************************************************************/
 #include "Rock.hpp"
+#include <iostream>
 
+using std::cout;
+using std::endl;
 
 /*********************************************************************
-**Description:
-**Arguments:
-**Returns:
+**Description:		Default constructor
+**Arguments:		none
+**Returns:			none
 *********************************************************************/
-Rock::Rock()
+Rock::Rock() :Tool()
 {
-	this->strength = 0;
+	//rock specific
 	this->type = 'r';
 }
 
 /*********************************************************************
-**Description:
-**Arguments:
-**Returns:
+**Description:		Destructor
+**Arguments:		none	
+**Returns:			none
 *********************************************************************/
 Rock::~Rock()
 {
+	//explicitly defined for good practice
 }
 
 /*********************************************************************
-**Description:
-**Arguments:
-**Returns:
+**Description:		Copy Constructor
+**Arguments:		none
+**Returns:			none
 *********************************************************************/
 Rock::Rock(const Rock & rhs) : Tool(rhs)
 {
+	//explicitly defined for good practice
 }
 
 /*********************************************************************
-**Description:
-**Arguments:
-**Returns:
+**Description:		Constructor that uses Tool class's constructor
+**Arguments:		strength integer
+**Returns:			none
 *********************************************************************/
-Rock::Rock(int rStrength)
+Rock::Rock(int rStrength): Tool(rStrength)
 {
-	this->setStrength(rStrength);
+	//rock specific
 	this->setType('r');
 }
 
 /*********************************************************************
-**Description:
-**Arguments:
-**Returns:
+**Description:		Operator overload
+**Arguments:		constant Rock Reference
+**Returns:			none
 *********************************************************************/
 void Rock::operator=(const Rock & rhs)
 {
+	//tool operator overload call
 	Tool::operator=(rhs);
 }
 
 /*********************************************************************
-**Description:
-**Arguments:
-**Returns:
+**Description:		Fight function.  Has two tool objects "fight". 
+					Strength values are modified depending on type.
+					CompareStrength() is called to compare the strengths of
+					the two objects and the result of the fight is returned
+					as a char.
+**Arguments:		reference to tool object
+**Returns:			character representing the outcome of the fight.
 *********************************************************************/
 char Rock::fight(Tool & toolIn)
 {
 	//Temporary strength holders
 	int tempRockStrength = this->strength;
 	int tempToolInStrength = toolIn.getStrength();
+
+	cout << "object 1 strength: " << tempRockStrength << endl;
+	cout << "object 2 strength: " << tempToolInStrength << endl;
 
 	char outcome;
 
@@ -91,4 +104,3 @@ char Rock::fight(Tool & toolIn)
 
 	return outcome;
 }
-
