@@ -22,6 +22,28 @@
 **    remove them.)
 ****************************************************************/
 
+
+
+
+//(2/18/17) - Note to testers, I commented out Sam's old code at the bottom if we want to revisit. I also 
+//                 got rid of screenClear() since it is in RPSGame(). The uncommented code should be our main - Armand
+
+
+
+#include "RPSGame.hpp" //I think this is all we need
+
+int main()
+{
+	RPSGame game;
+	game.mainMenu();
+	return 0;
+	
+}
+
+
+//Old code below
+/* 
+
 #include <iostream>
 
 #include "Menu.hpp"
@@ -47,15 +69,7 @@ int main()
 	return 0;
 }
 
-void screenClear()
-{
-#ifdef __linux__ 
-	system("clear");
 
-#elif _WIN32
-	system("cls");
-#endif
-}
 
 
 
@@ -81,3 +95,4 @@ void printHeader()
 	std::cout << std::endl;
 }
 
+*/
