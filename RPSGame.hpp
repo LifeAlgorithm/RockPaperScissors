@@ -28,7 +28,7 @@ class RPSGame
 		//~RPSGame();
 		//RPSGame& operator= (const RPSGame&);
 		void mainMenu();
-		void choiceMenu();
+		int choiceMenu();
 		void toolSettingsMenu();
 		tool* buildHumanTool(char);
 		tool* buildComputerTool(char);
