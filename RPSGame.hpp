@@ -1,6 +1,5 @@
 #ifndef RPSGame_HPP
 #define RPSGame_HPP
-#include "Item.hpp"
 #include "Tool.hpp"
 #include <vector>
 
