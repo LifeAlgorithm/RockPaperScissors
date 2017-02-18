@@ -124,7 +124,7 @@ char RPSGame::choiceToTool(int inputChoice)
 }
 
 /***************************************************************************************************
-* nextAIMove - Chooses next move based on past user choice. Random before round 4. After round 4,
+* nextAIMove - Chooses next move based on past user choices. Random before round 4. After round 4,
 				randomly choose amongst tools stored in knowledgeBase, and pick the opposite tool.
 				This punishes the user for picking one tool more frequently than the others,
 				whilst maintaining an element of randomness. 
@@ -280,16 +280,12 @@ int RPSGame::choiceMenu()
 }
 
 
-
-
-
 /***************************************************************************************************
 * mainMenu - Interfaces user to start a new game, modify tool settings, and quit
 * **************************************************************************************************/
 
 void RPSGame::mainMenu()
 {
-
         bool runMain = true;
         int mainInput;
 
