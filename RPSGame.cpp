@@ -192,7 +192,7 @@ void playGame();
 			gameRun = false;	
 			cout << "Game ending..." << endl;
 			cout << endl << "Final Score:      You: " << humanWins << "  Computer: " << computerWins << endl;
-			cout << endl << "Press enter to go back to main menu "" < endl;
+			cout << endl << "Press enter to go back to main menu " < endl;
 			screenContinue();
 		}
 		else 
