@@ -33,11 +33,11 @@ RPSGame::RPSGame()
         humanRockStrength = 100;
         humanScissorStrength = 100;
 		
-		computerPaperStrength = 100;
+	computerPaperStrength = 100;
         computerRockStrength = 100;
         computerScissorStrength = 100;
         
-		unsigned seed = time(0);
+	unsigned seed = time(0);
         srand(seed);
 }
 
@@ -314,16 +314,16 @@ void RPSGame::toolSettingsMenu()
                 screenClear();
                 cout << "Tool Settings Menu" << endl << endl;
                 cout << "1) Human Tool Strength" << endl;
-				cout << "2) Computer Tool Strength" << endl;
-				cout << "3) Back to main menu" << endl;
+		cout << "2) Computer Tool Strength" << endl;
+		cout << "3) Back to main menu" << endl;
                 
-				//cout << "X) Tempo - (" << getTempo() << " seconds)" << endl;     If we want to add tempo between rounds
+		//cout << "X) Tempo - (" << getTempo() << " seconds)" << endl;     If we want to add tempo between rounds
 
                 cout << "Enter option (1-3): ";
                 cin >> settingsInput;
                 settingsInput = validateBetween(settingsInput, 1, 5);
                 
-				switch (settingsInput)
+		switch (settingsInput)
                 {
                 case 1: //Human tool Strength
                 {
@@ -376,9 +376,9 @@ void RPSGame::toolSettingsMenu()
 				}
 					   
 				case 2: //Computer tool Strength
-                {
-                       bool computerToolSettingsRun = true;
-					   int tempUserChoice;
+               			 {
+                     			  bool computerToolSettingsRun = true;
+					  int tempUserChoice;
 					   
 					   
 					   while(computerToolSettingsRun)
