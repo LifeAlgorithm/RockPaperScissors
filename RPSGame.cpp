@@ -119,7 +119,7 @@ char choiceToTool(int inputChoice)
 		case 3:
 		{
 			return 's';
-		|
+		}
 	}
 }
 
