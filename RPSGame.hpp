@@ -25,20 +25,26 @@ class RPSGame
 	public:
 		RPSGame();
 		//RPSGame(const RPSGame);
-		//~RPSGame();
+		virtual ~RPSGame();
 		//RPSGame& operator= (const RPSGame&);
 		void mainMenu();
-		int choiceMenu();
+		virtual int choiceMenu();
 		void toolSettingsMenu();
 		Tool* buildHumanTool(char);
 		Tool* buildComputerTool(char);
-		char choiceToTool(int);
+
+        virtual char choiceToTool(int);
 		char nextAIMove(int);
-		void printRoundResult(char);
-		void playGame();
+		virtual void printRoundResult(char);
+		virtual void playGame();
 		void screenClear();
 		void screenContinue();
         int validateBetween(int inputNumber, int validMin, int validMax);
+
+    protected:
+        Tool *getHumanTool() const;
+
+        Tool *getComputerTool() const;
 
 };
 

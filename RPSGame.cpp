@@ -38,6 +38,8 @@ RPSGame::RPSGame()
     srand(time(0));
 }
 
+RPSGame::~RPSGame() {}
+
 /***************************************************************************************************
 * buildComputerTool - Dynamically creates new human tool based on tool input
 * **************************************************************************************************/
@@ -224,7 +226,6 @@ void RPSGame::playGame()
 int RPSGame::choiceMenu()
 {
 
-        bool runChoice = true;
         int userChoice;
 
         cout << "Choose an option below: " << endl << endl;
@@ -464,5 +465,13 @@ void RPSGame::screenContinue() {
     #elif _WIN32
             system("pause");
     #endif
+}
+
+Tool *RPSGame::getHumanTool() const {
+    return humanTool;
+}
+
+Tool *RPSGame::getComputerTool() const {
+    return computerTool;
 }
 

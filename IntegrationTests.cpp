@@ -4,6 +4,7 @@ Date:  2/18/17
 Description: Unit tests for selected functions
 *************************************************************************/
 #include <iostream>
+#include "RPSGame.hpp"
 #include "Scissor.hpp"
 #include "Rock.hpp"
 #include "Paper.hpp"
@@ -14,6 +15,85 @@ using std::endl;
 #define FAILED cout << "!!!! FAILED !!!!! ";
 #define PASSED cout << "Passed: ";
 
+class RPSGameStub : public RPSGame {
+public:
+    int count;
+
+    RPSGameStub() : RPSGame() {
+        count = 0;
+    }
+
+    int choiceMenu() override {
+        count++;
+        if (count > 5) {
+            return 4;
+        }
+        return rand()%(3-1+1)+1;
+    }
+
+    void printRoundResult(char result) override {
+        char humanType = getHumanTool()->getType();
+        char compType = getComputerTool()->getType();
+
+        if (humanType == 'r' && compType == 'p' && result != 'l') {
+            FAILED;
+            cout << "ROCK vs PAPER - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 'r' && compType == 's' && result != 'w') {
+            FAILED;
+            cout << "ROCK vs SCISSOR - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 'r' && compType == 'r' && result != 't') {
+            FAILED;
+            cout << "ROCK vs ROCK - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 'p' && compType == 's' && result != 'l') {
+            FAILED;
+            cout << "PAPER vs SCISSOR - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 'p' && compType == 'r' && result != 'w') {
+            FAILED;
+            cout << "PAPER vs ROCK - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 'p' && compType == 'p' && result != 't') {
+            FAILED;
+            cout << "PAPER vs PAPER - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 's' && compType == 'r' && result != 'l') {
+            FAILED;
+            cout << "SCISSOR vs ROCK - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 's' && compType == 'p' && result != 'w') {
+            FAILED;
+            cout << "SCISSOR vs PAPER - result: " << result << endl;
+            return;
+        }
+
+        if (humanType == 's' && compType == 's' && result != 't') {
+            FAILED;
+            cout << "SCISSOR vs SCISSOR - result: " << result << endl;
+            return;
+        }
+
+        PASSED;
+        cout << humanType << " vs " << compType << " - result: " << result << endl;
+    }
+};
+
 void deleteTools(Rock *scissor, Paper *rock, Scissor *paper) {
     delete rock;
     delete paper;
@@ -21,9 +101,9 @@ void deleteTools(Rock *scissor, Paper *rock, Scissor *paper) {
 }
 
 int testDefaultStrenghtFights() {
-    Scissor* scissor = new Scissor(10);
-    Rock* rock = new Rock(10);
-    Paper* paper = new Paper(10);
+    Scissor* scissor = new Scissor(100);
+    Rock* rock = new Rock(100);
+    Paper* paper = new Paper(100);
 
     cout << "SCISSOR vs SCISSOR - ";
     if (scissor->fight(*scissor) != 't') {
@@ -95,8 +175,17 @@ int testDefaultStrenghtFights() {
     return 0;
 }
 
+int testRPSGame() {
+    cout << endl;
+    RPSGame* rpsGame = new RPSGameStub();
+    rpsGame->playGame();
+    delete rpsGame;
+    return 0;
+}
+
 int main() {
 
-    return testDefaultStrenghtFights();
+    return testDefaultStrenghtFights()
+            && testRPSGame();
 
 }
