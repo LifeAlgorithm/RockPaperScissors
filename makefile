@@ -19,19 +19,19 @@ CXXFLAGS += -Wall
 CXXFLAGS += -pedantic-errors
 CXXFLAGS += -g
 #CXXFLAGS += -03
-LDFLAGS = -lboost_date_time
+LDFLAGS =
 
 TOPPRG = playgame
 ZIPID = GroupProj_Team10.zip
 
 MENU_OBJS       = chewsValidation_v5.o play_game.o Menu.o
-OBJS            = Tool.o Rock.o Paper.o Scissors.o RPSGame.o
+OBJS            = Tool.o Rock.o Paper.o Scissor.o RPSGame.o
 
 MENU_SRCS       = chewsValidation_v5.cpp play_game.cpp Menu.cpp
-SRCS            = Tool.cpp Rock.cpp Paper.cpp Scissors.cpp RPSGame.cpp
+SRCS            = Tool.cpp Rock.cpp Paper.cpp Scissor.cpp RPSGame.cpp
 
 MENU_HEADERS    = chewsValidation_v5.hpp Menu.hpp
-HEADERS         = Tool.hpp Rock.hpp Paper.hpp Scissors.hpp RPSGame.hpp
+HEADERS         = Tool.hpp Rock.hpp Paper.hpp Scissor.hpp RPSGame.hpp
 
 UTILTXT         = Menu_StartOpts.txt Menu_PlayOpts.txt
 
@@ -41,9 +41,6 @@ UTILTXT         = Menu_StartOpts.txt Menu_PlayOpts.txt
 
 ${TOPPRG}: ${OBJS} ${MENU_OBJS} ${HEADERS} ${MENU_HEADERS}
 	${CXX} ${LDFLAGS} ${OBJS} ${MENU_OBJS} -o ${TOPPRG}
-	@for i in . . . . . . .; do \
-		echo $i; \
-	done
 
 ${OBJS}: ${SRCS}
 	${CXX} ${CXXFLAGS} -c $(@:.o=.cpp)
@@ -63,8 +60,8 @@ zip :
 ##### INTEGRATION TESTING #####
 
 IT_TESTS_EXE = integrationTest
-IT_TEST_OBJS = IntegrationTest.o
-IT_TEST_SRCS = IntegrationTest.cpp
+IT_TEST_OBJS = IntegrationTests.o
+IT_TEST_SRCS = IntegrationTests.cpp
 
 ${IT_TESTS_EXE}: ${OBJS} ${IT_TEST_OBJS} ${HEADERS}
 	${CXX} ${LDFLAGS} ${OBJS} ${IT_TEST_OBJS} -o ${IT_TESTS_EXE}
@@ -74,6 +71,6 @@ ${IT_TEST_OBJS}: ${IT_TEST_SRCS}
 
 .PHONY : testsClean
 testsClean :
-	rm ${UNIT_TESTS_EXE} ${IT_TESTS_EXE} ${TEST_OBJS}
+	rm ${IT_TESTS_EXE} ${TEST_OBJS} ${OBJS}
 
 ##### END TESTING #####
