@@ -45,10 +45,10 @@ ${TOPPRG}: ${OBJS} ${MENU_OBJS} ${HEADERS} ${MENU_HEADERS}
 		echo $i; \
 	done
 
-${MENU_OBJS}: ${MENU_SRCS}
+${OBJS}: ${SRCS}
 	${CXX} ${CXXFLAGS} -c $(@:.o=.cpp)
 
-${OBJS}: ${SRCS}
+${MENU_OBJS}: ${MENU_SRCS}
 	${CXX} ${CXXFLAGS} -c $(@:.o=.cpp)
 
 .PHONY : clean
@@ -60,18 +60,7 @@ zip :
 	zip -D ${ZIPID} ${HEADERS} ${SRCS} ${UTILTXT} makefile
 
 
-##### UNIT AND INTEGRATION TESTING #####
-
-UNIT_TESTS_EXE = unitTest
-UNIT_TEST_OBJS = UnitTests.o
-UNIT_TEST_SRCS = UnitTests.cpp
-
-${UNIT_TESTS_EXE}: ${OBJS} ${UNIT_TEST_OBJS} ${HEADERS}
-	${CXX} ${LDFLAGS} ${OBJS} ${UNIT_TEST_OBJS} -o ${UNIT_TESTS_EXE}
-
-${UNIT_TEST_OBJS}: ${UNIT_TEST_SRCS}
-	${CXX} ${CXXFLAGS} -c $(@:.o=.cpp)
-
+##### INTEGRATION TESTING #####
 
 IT_TESTS_EXE = integrationTest
 IT_TEST_OBJS = IntegrationTest.o
