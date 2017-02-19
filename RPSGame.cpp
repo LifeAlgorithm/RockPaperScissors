@@ -5,8 +5,8 @@
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-//#include <thread> use if want to add duration/tempo between rounds + steps
-//#include <chrono> use if want to add duration/tempo between rounds + steps
+#include <thread>
+#include <chrono>
 
 using std::vector;
 using std::cout;
@@ -189,7 +189,8 @@ void RPSGame::playGame()
 			humanTool = buildHumanTool(choiceToTool(tempUserChoice));
 			computerTool = buildComputerTool(nextAIMove(currentRound));
 			knowledgeBase.push_back(choiceToTool(tempUserChoice)); // can also use humanTool.getType()
-			
+
+            cout << humanTool->getLongType() << " vs " << computerTool->getLongType() << endl;
 			tempRoundResult = humanTool->fight(*computerTool);
 			
 			if (tempRoundResult == 'w')
@@ -213,9 +214,11 @@ void RPSGame::playGame()
 			currentRound++;
 			delete humanTool;
 			delete computerTool;
-			cout << endl << "Press enter to begin next round" << endl;
 			screenContinue();
 			screenClear();
+
+            std::chrono::seconds sleepDuration(1);
+            std::this_thread::sleep_for(sleepDuration);
 		}
 	}
 }
@@ -307,7 +310,7 @@ void RPSGame::toolSettingsMenu() {
 
         cout << "Enter option (1-3): ";
         cin >> settingsInput;
-        settingsInput = validateBetween(settingsInput, 1, 5);
+        settingsInput = validateBetween(settingsInput, 1, 3);
 
         switch (settingsInput) {
             case 1: //Human tool Strength
@@ -325,27 +328,28 @@ void RPSGame::toolSettingsMenu() {
                     cout << "4) Back to Tool settings menu" << endl;
                     cout << endl << endl << "Enter 1-4: ";
                     cin >> tempUserChoice;
-                    tempUserChoice = validateBetween(tempUserChoice, 1, 3);
+                    tempUserChoice = validateBetween(tempUserChoice, 1, 4);
+                    int tempStrength = 0;
                     switch (tempUserChoice) {
                         case 1: // Set Human rock strength
                         {
                             cout << endl << "Enter new rock strength: ";
-                            cin >> humanRockStrength;
-                            humanRockStrength = validateBetween(tempUserChoice, 1, maxStrength);
+                            cin >> tempStrength;
+                            humanRockStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 2: // Set Human paper strength
                         {
                             cout << endl << "Enter new paper strength: ";
                             cin >> humanPaperStrength;
-                            humanPaperStrength = validateBetween(tempUserChoice, 1, maxStrength);
+                            humanPaperStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 3: // Set Human scissor strength
                         {
                             cout << endl << "Enter new scissor strength: ";
                             cin >> humanScissorStrength;
-                            humanScissorStrength = validateBetween(tempUserChoice, 1, maxStrength);
+                            humanScissorStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 4: {
@@ -371,27 +375,28 @@ void RPSGame::toolSettingsMenu() {
                     cout << "4) Back to Tool settings menu" << endl;
                     cout << endl << endl << "Enter 1-4: ";
                     cin >> tempUserChoice;
-                    tempUserChoice = validateBetween(tempUserChoice, 1, 3);
+                    tempUserChoice = validateBetween(tempUserChoice, 1, 4);
+                    int tempStrength = 0;
                     switch (tempUserChoice) {
                         case 1: // Set Computer rock strength
                         {
                             cout << endl << "Enter new rock strength: ";
                             cin >> computerRockStrength;
-                            computerRockStrength = validateBetween(tempUserChoice, 1, maxStrength);
+                            computerRockStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 2: // Set Computer paper strength
                         {
                             cout << endl << "Enter new paper strength: ";
                             cin >> computerPaperStrength;
-                            computerPaperStrength = validateBetween(tempUserChoice, 1, maxStrength);
+                            computerPaperStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 3: // Set Computer scissor strength
                         {
                             cout << endl << "Enter new scissor strength: ";
                             cin >> computerScissorStrength;
-                            computerScissorStrength = validateBetween(tempUserChoice, 1, maxStrength);
+                            computerScissorStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 4: {

@@ -23,42 +23,18 @@
 ****************************************************************/
 
 #include <iostream>
-
-#include "Menu.hpp"
+#include "RPSGame.hpp"
 
 //Function Prototypes
 void printHeader();
-void screenClear();
 
 int main()
 {
-	//Print Program Information
-	screenClear();
-	printHeader();
-	
-	//Call Start Game menu
-	menuSetupGame();
-	
-	//Call main Game Play menu
-	menuGamePlay();
-	
-	
-	
+    printHeader();
+    RPSGame rpsGame;
+    rpsGame.mainMenu();
 	return 0;
 }
-
-void screenClear()
-{
-#ifdef __linux__ 
-	system("clear");
-
-#elif _WIN32
-	system("cls");
-#endif
-}
-
-
-
 
 //Utility Function to print Program Header to screen
 void printHeader()
