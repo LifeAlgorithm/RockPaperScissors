@@ -11,25 +11,58 @@ Description: Unit tests for selected functions
 using std::cout;
 using std::endl;
 
-#define FAILED cout << "!!!! FAILED !!!!!  ";
+#define FAILED cout << "!!!! FAILED !!!!! ";
 #define PASSED cout << "Passed: ";
 
-void deleteObjs(Rock* scissor, Paper* rock, Scissor* paper) {
+void deleteTools(Rock *scissor, Paper *rock, Scissor *paper) {
     delete rock;
     delete paper;
     delete scissor;
 }
 
-int testFights() {
+int testDefaultStrenghtFights() {
     Scissor* scissor = new Scissor(10);
     Rock* rock = new Rock(10);
     Paper* paper = new Paper(10);
+
+    cout << "SCISSOR vs SCISSOR - ";
+    if (scissor->fight(*scissor) != 't') {
+        FAILED;
+        cout << "scissor vs scissor should be a tie" << endl;
+        deleteTools(rock, paper, scissor);
+        return -10;
+    } else {
+        PASSED;
+        cout << "result was a tie" << endl;
+    }
+
+    cout << "ROCK vs ROCK - ";
+    if (rock->fight(*rock) != 't') {
+        FAILED;
+        cout << "rock vs rock should be a tie" << endl;
+        deleteTools(rock, paper, scissor);
+        return -10;
+    } else {
+        PASSED;
+        cout << "result was a tie" << endl;
+    }
+
+    cout << "PAPER vs PAPER - ";
+    if (paper->fight(*paper) != 't') {
+        FAILED;
+        cout << "paper vs paper should be a tie" << endl;
+        deleteTools(rock, paper, scissor);
+        return -10;
+    } else {
+        PASSED;
+        cout << "result was a tie" << endl;
+    }
 
     cout << "SCISSOR vs ROCK - ";
     if (scissor->fight(*rock) != 'l') {
         FAILED;
         cout << "scissor should not beat rock" << endl;
-        deleteObjs(rock, paper, scissor);
+        deleteTools(rock, paper, scissor);
         return -10;
     } else {
         PASSED;
@@ -40,7 +73,7 @@ int testFights() {
     if (scissor->fight(*paper) != 'w') {
         FAILED;
         cout << "scissor should beat paper" << endl;
-        deleteObjs(rock, paper, scissor);
+        deleteTools(rock, paper, scissor);
         return -10;
     } else {
         PASSED;
@@ -51,19 +84,19 @@ int testFights() {
     if (rock->fight(*paper) != 'w') {
         FAILED;
         cout << "rock should not beat paper" << endl;
-        deleteObjs(rock, paper, scissor);
+        deleteTools(rock, paper, scissor);
         return -10;
     } else {
         PASSED;
         cout << "paper beat rock" << endl;
     }
 
-    deleteObjs(rock, paper, scissor);
+    deleteTools(rock, paper, scissor);
     return 0;
 }
 
 int main() {
 
-    return testFights();
+    return testDefaultStrenghtFights();
 
 }

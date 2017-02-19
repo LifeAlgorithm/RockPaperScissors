@@ -1,17 +1,14 @@
 /************************************************************************
-Author: Peter Yetti 
+Author: Group 10
 Date:  2/18/17
-Description: Implementation for IntegrationTest.cpp
+Description: Integration test for RockPaperScissor
 *************************************************************************/
 
+#include <iostream>
 
-// Default Constructor
+using std::cout;
+using std::endl;
 
-
-// Parameterized Constructor
-
-
-// Copy Constructor
-
-
-// Destructor
+int main() {
+    cout << "TESTING" << endl;
+}
