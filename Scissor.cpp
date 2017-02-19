@@ -11,8 +11,6 @@ specific to the scissor functionality.
 
 // Header files to be included
 #include "Scissor.hpp"
-#include "Tool.hpp"
-#include <iostream>
 
 // Using objects to make life easier
 // Intentionally blank
