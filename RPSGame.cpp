@@ -6,7 +6,6 @@
 #include <ctime>
 #include <cstdlib>
 #include <thread>
-#include <chrono>
 
 
 using std::vector;
@@ -221,7 +220,6 @@ void RPSGame::playGame()
 			screenContinue();
 			//screenClear();
 
-            std::chrono::seconds sleepDuration(1);
             std::this_thread::sleep_for(sleepDuration);
 		}
 	}
