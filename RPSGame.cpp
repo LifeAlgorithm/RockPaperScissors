@@ -6,7 +6,6 @@
 #include <ctime>
 #include <cstdlib>
 #include <thread>
-#include <chrono>
 
 using std::vector;
 using std::cout;
@@ -34,6 +33,8 @@ RPSGame::RPSGame()
 	computerPaperStrength = 100;
     computerRockStrength = 100;
     computerScissorStrength = 100;
+    std::chrono::seconds sleep(0);
+    sleepDuration = sleep;
 
     srand(time(0));
 }
@@ -217,7 +218,6 @@ void RPSGame::playGame()
 			screenContinue();
 			screenClear();
 
-            std::chrono::seconds sleepDuration(1);
             std::this_thread::sleep_for(sleepDuration);
 		}
 	}
@@ -478,5 +478,10 @@ Tool *RPSGame::getHumanTool() const {
 
 Tool *RPSGame::getComputerTool() const {
     return computerTool;
+}
+
+void RPSGame::setSleepDuration(int sleepDuration) {
+    std::chrono::seconds sleep(sleepDuration);
+    this->sleepDuration = sleep;
 }
 

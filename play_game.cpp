@@ -32,6 +32,7 @@ int main()
 {
     printHeader();
     RPSGame rpsGame;
+    rpsGame.setSleepDuration(1);
     rpsGame.mainMenu();
 	return 0;
 }
