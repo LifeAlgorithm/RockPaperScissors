@@ -30,7 +30,7 @@ RPSGame::RPSGame()
     humanPaperStrength = 100;
     humanRockStrength = 100;
     humanScissorStrength = 100;
-		
+
 	computerPaperStrength = 100;
     computerRockStrength = 100;
     computerScissorStrength = 100;
@@ -206,10 +206,10 @@ void RPSGame::playGame()
 			{
 				ties++;
 			}
-			
-			printRoundResult(tempRoundResult);
+
+            printRoundResult(tempRoundResult);
 			cout << endl << "Current Score:      You: " << humanWins << "  Computer: " << computerWins << endl;
-			
+
 			currentRound++;
 			delete humanTool;
 			delete computerTool;
