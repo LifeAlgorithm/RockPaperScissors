@@ -30,14 +30,15 @@ class RPSGame
 		void mainMenu();
 		int choiceMenu();
 		void toolSettingsMenu();
-		tool* buildHumanTool(char);
-		tool* buildComputerTool(char);
+		Tool* buildHumanTool(char);
+		Tool* buildComputerTool(char);
 		char choiceToTool(int);
 		char nextAIMove(int);
 		void printRoundResult(char);
 		void playGame();
 		void screenClear();
 		void screenContinue();
+        int validateBetween(int inputNumber, int validMin, int validMax);
 
 };
 
