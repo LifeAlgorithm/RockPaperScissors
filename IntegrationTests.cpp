@@ -17,7 +17,8 @@ using std::endl;
 
 class RPSGameStub : public RPSGame {
 public:
-    int count, exit, result = 0;
+    int exit, count = 0, result = 0;
+    bool strengthChanged = false;
 
     RPSGameStub(int exit) {
         this->exit = exit;
@@ -37,7 +38,42 @@ public:
         return rand()%(3-1+1)+1;
     }
 
+    void setNewStrength(int player, int type, int value) {
+        strengthChanged = true;
+        switch (player) {
+            case 1: {
+                switch (type) {
+                    case 1:
+                        humanRockStrength = value;
+                        break;
+                    case 2:
+                        humanPaperStrength = value;
+                        break;
+                    default:
+                        humanScissorStrength = value;
+                }
+                break;
+            }
+            default: {
+                switch (type) {
+                    case 1:
+                        computerRockStrength = value;
+                        break;
+                    case 2:
+                        computerPaperStrength = value;
+                        break;
+                    default:
+                        computerScissorStrength = value;
+                }
+            }
+        }
+    }
+
     void printRoundResult(char result) override {
+        if (strengthChanged) {
+            return;
+        }
+
         char humanType = getHumanTool()->getType();
         char compType = getComputerTool()->getType();
 
@@ -109,92 +145,101 @@ public:
     }
 };
 
-void deleteTools(Rock *scissor, Paper *rock, Scissor *paper) {
-    delete rock;
-    delete paper;
-    delete scissor;
-}
-
 int testDefaultStrenghtFights() {
     Scissor* scissor = new Scissor(100);
     Rock* rock = new Rock(100);
     Paper* paper = new Paper(100);
 
+    int result = 0;
+
     cout << "SCISSOR vs SCISSOR - ";
     if (scissor->fight(*scissor) != 't') {
         FAILED;
-        cout << "scissor vs scissor should be a tie" << endl;
-        deleteTools(rock, paper, scissor);
-        return -10;
+        cout << "scissor vs scissor should be a tie\n";
+        result = -10;
     } else {
         PASSED;
-        cout << "result was a tie" << endl;
+        cout << "result was a tie\n";
     }
 
     cout << "ROCK vs ROCK - ";
     if (rock->fight(*rock) != 't') {
         FAILED;
-        cout << "rock vs rock should be a tie" << endl;
-        deleteTools(rock, paper, scissor);
-        return -10;
+        cout << "rock vs rock should be a tie\n";
+        result = -10;
     } else {
         PASSED;
-        cout << "result was a tie" << endl;
+        cout << "result was a tie\n";
     }
 
     cout << "PAPER vs PAPER - ";
     if (paper->fight(*paper) != 't') {
         FAILED;
-        cout << "paper vs paper should be a tie" << endl;
-        deleteTools(rock, paper, scissor);
-        return -10;
+        cout << "paper vs paper should be a tie\n";
+        result = -10;
     } else {
         PASSED;
-        cout << "result was a tie" << endl;
+        cout << "result was a tie\n";
     }
 
     cout << "SCISSOR vs ROCK - ";
     if (scissor->fight(*rock) != 'l') {
         FAILED;
-        cout << "scissor should not beat rock" << endl;
-        deleteTools(rock, paper, scissor);
-        return -10;
+        cout << "scissor should not beat rock\n";
+        result = -10;
     } else {
         PASSED;
-        cout << "rock beat scissor" << endl;
+        cout << "rock beat scissor\n";
     }
 
     cout << "SCISSOR vs PAPER - ";
     if (scissor->fight(*paper) != 'w') {
         FAILED;
-        cout << "scissor should beat paper" << endl;
-        deleteTools(rock, paper, scissor);
-        return -10;
+        cout << "scissor should beat paper\n";
+        result = -10;
     } else {
         PASSED;
-        cout << "scissor beat paper" << endl;
+        cout << "scissor beat paper\n";
     }
 
     cout << "ROCK vs PAPER - ";
     if (rock->fight(*paper) != 'l') {
         FAILED;
-        cout << "rock should not beat paper" << endl;
-        deleteTools(rock, paper, scissor);
-        return -10;
+        cout << "rock should not beat paper\n";
+        result = -10;
     } else {
         PASSED;
-        cout << "paper beat rock" << endl;
+        cout << "paper beat rock\n";
     }
 
-    deleteTools(rock, paper, scissor);
-    return 0;
+    cout << endl;
+
+    delete rock;
+    delete paper;
+    delete scissor;
+    return result;
+}
+
+int testRPSGameDefaultStrength() {
+    cout << endl;
+    RPSGameStub* rpsGame = new RPSGameStub(5);
+    rpsGame->playGame();
+
+    int result = rpsGame->getResult();
+
+    rpsGame->setNewStrength(1, 1, 200);
+    rpsGame->playGame();
+    result += rpsGame->getResult();
+    delete rpsGame;
+    return result;
 }
 
 int testRPSGame() {
     cout << endl;
     RPSGameStub* rpsGame = new RPSGameStub(5);
-    rpsGame->playGame();
 
+    rpsGame->setNewStrength(1, 1, 200);
+    rpsGame->playGame();
     int result = rpsGame->getResult();
     delete rpsGame;
     return result;
@@ -202,6 +247,6 @@ int testRPSGame() {
 
 int main() {
 
-    return testDefaultStrenghtFights() + testRPSGame();
+    return testDefaultStrenghtFights() + testRPSGameDefaultStrength() + testRPSGame();
 
 }
