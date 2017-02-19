@@ -16,6 +16,7 @@ Paper::Paper()
 {
 	this->strength = 0;
 	this->type = 'p';
+	this->longType = "Paper";
 }
 
 /*********************************************************************
@@ -45,6 +46,7 @@ Paper::Paper(int pStrength)
 {
 	this->setStrength(pStrength);
 	this->setType('p');
+    this->longType = "Paper";
 }
 
 /*********************************************************************

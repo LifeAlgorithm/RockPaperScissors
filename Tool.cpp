@@ -135,3 +135,12 @@ char Tool::compareStrength(int strength1, int strength2)
 	}
 	return outcome;
 }
+
+/*********************************************************************
+**Description: get the long type (Rock, Paper, Scissor)
+**Arguments: none
+**Returns: string
+*********************************************************************/
+const std::string &Tool::getLongType() const {
+    return longType;
+}

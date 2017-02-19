@@ -16,6 +16,7 @@ Rock::Rock()
 {
 	this->strength = 0;
 	this->type = 'r';
+	this->longType = "Rock";
 }
 
 /*********************************************************************
@@ -45,6 +46,7 @@ Rock::Rock(int rStrength)
 {
 	this->setStrength(rStrength);
 	this->setType('r');
+    this->longType = "Rock";
 }
 
 /*********************************************************************

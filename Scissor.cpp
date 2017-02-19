@@ -28,6 +28,7 @@ Scissor::Scissor() : Tool()
 {
 	// Additional code specific to scissor
 	this->type = 's';
+	this->longType = "Scissor";
 }
 
 /***********************************************
@@ -43,6 +44,7 @@ Scissor::Scissor(int str) : Tool(str)
 {
 	// Additional code specific to scissor
 	this->type = 's';
+    this->longType = "Scissor";
 }
 
 /***********************************************

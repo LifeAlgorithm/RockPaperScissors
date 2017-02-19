@@ -8,6 +8,8 @@
 #ifndef TOOL_HPP
 #define TOOL_HPP
 
+#include <string>
+
 class Tool
 {
 public:
@@ -28,9 +30,12 @@ public:
 	char compareStrength(int, int);
 	virtual char fight(Tool&) = 0;
 
+    const std::string &getLongType() const;
+
 protected:
 	int strength;
 	char type;
+	std::string longType;
 };
 
 #endif // !TOOL_HPP
