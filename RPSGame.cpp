@@ -27,16 +27,15 @@ using std::size_t;
 
 RPSGame::RPSGame()
 {
-        humanPaperStrength = 100;
-        humanRockStrength = 100;
-        humanScissorStrength = 100;
+    humanPaperStrength = 100;
+    humanRockStrength = 100;
+    humanScissorStrength = 100;
 		
 	computerPaperStrength = 100;
-        computerRockStrength = 100;
-        computerScissorStrength = 100;
-        
-	unsigned seed = time(0);
-        srand(seed);
+    computerRockStrength = 100;
+    computerScissorStrength = 100;
+
+    srand(time(0));
 }
 
 /***************************************************************************************************
