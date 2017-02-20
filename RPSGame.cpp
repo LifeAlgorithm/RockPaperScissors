@@ -60,7 +60,7 @@ Tool* RPSGame::buildHumanTool(char toolSymbol)
 		}
         default:
 		{
-			return new Scissor(humanRockStrength);
+			return new Scissor(humanScissorStrength);
 		}
 	}
 
@@ -84,7 +84,7 @@ Tool* RPSGame::buildComputerTool(char toolSymbol)
 		}
         default:
 		{
-            return new Scissor(computerRockStrength);
+            return new Scissor(computerScissorStrength);
 		}
 	}
 }
