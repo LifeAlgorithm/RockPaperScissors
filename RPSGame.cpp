@@ -1,14 +1,11 @@
 #include "Rock.hpp"
-#include "Scissor.hpp"
 #include "Paper.hpp"
-#include "Tool.hpp"
+#include "Scissor.hpp"
 #include "RPSGame.hpp"
-#include <vector>
 #include <iostream>
 #include <ctime>
 #include <cstdlib>
-//#include <thread> use if want to add duration/tempo between rounds + steps
-//#include <chrono> use if want to add duration/tempo between rounds + steps
+#include <thread>
 
 using std::vector;
 using std::cout;
@@ -29,73 +26,66 @@ using std::size_t;
 
 RPSGame::RPSGame()
 {
-        humanPaperStrength = 100;
-        humanRockStrength = 100;
-        humanScissorStrength = 100;
-		
+    humanPaperStrength = 100;
+    humanRockStrength = 100;
+    humanScissorStrength = 100;
+
 	computerPaperStrength = 100;
-        computerRockStrength = 100;
-        computerScissorStrength = 100;
-        
-	unsigned seed = time(0);
-        srand(seed);
+    computerRockStrength = 100;
+    computerScissorStrength = 100;
+    std::chrono::seconds sleep(0);
+    sleepDuration = sleep;
+
+    srand(time(0));
 }
+
+RPSGame::~RPSGame() {}
 
 /***************************************************************************************************
 * buildComputerTool - Dynamically creates new human tool based on tool input
 * **************************************************************************************************/
 
-tool* RPSGame::buildHumanTool(char toolSymbol)
+Tool* RPSGame::buildHumanTool(char toolSymbol)
 {
-	tool* newTool;
 	switch(toolSymbol)
 	{
 		case 'r':
 		{
-			newTool = new Rock(humanRockStrength);
-			break;
+			return new Rock(humanRockStrength);
 		}
 		case 'p':
 		{
-			newTool = new Paper(humanPaperStrength);
-			break;
+			return new Paper(humanPaperStrength);
 		}
-		case 's':
+        default:
 		{
-			newTool = new Scissor(humanRockStrength);
-			break;
+			return new Scissor(humanRockStrength);
 		}
 	}
 
-	return newTool;
 }
 
 /***************************************************************************************************
 * buildComputerTool - Dynamically creates new computer tool based on tool input
 * **************************************************************************************************/
 
-tool* RPSGame::buildComputerTool(char toolSymbol)
+Tool* RPSGame::buildComputerTool(char toolSymbol)
 {
-	tool* newTool;
 	switch(toolSymbol)
 	{
 		case 'r':
 		{
-			newTool = new Rock(computerRockStrength);
-			break;
+			return new Rock(computerRockStrength);
 		}
 		case 'p':
 		{
-			newTool = new Paper(computerPaperStrength);
-			break;
+            return new Paper(computerPaperStrength);
 		}
-		case 's':
+        default:
 		{
-			newTool = new Scissor(computerRockStrength);
-			break;
+            return new Scissor(computerRockStrength);
 		}
 	}
-	return newTool;
 }
 
 /***************************************************************************************************
@@ -116,7 +106,7 @@ char RPSGame::choiceToTool(int inputChoice)
 		{
 			return 'p';
 		}
-		case 3:
+        default:
 		{
 			return 's';
 		}
@@ -124,7 +114,7 @@ char RPSGame::choiceToTool(int inputChoice)
 }
 
 /***************************************************************************************************
-* nextAIMove - Chooses next move based on past user choices. Random before round 4. After round 4,
+* nextAIMove - Chooses next move based on past user choice. Random before round 4. After round 4,
 				randomly choose amongst tools stored in knowledgeBase, and pick the opposite tool.
 				This punishes the user for picking one tool more frequently than the others,
 				whilst maintaining an element of randomness. 
@@ -136,15 +126,15 @@ char RPSGame::nextAIMove(int inputRound)
 	if (inputRound < 4) //if current round is less than 4, choose a random tool for the computer and let knowledgeBase increase
 	{
 		int randNumber;
-		randNumber = rand()%(3-1+1)+1 //random number between 1 and 3
-		outputTool = choiceToTool(randNumber)
+		randNumber = rand()%(3-1+1)+1; //random number between 1 and 3
+		outputTool = choiceToTool(randNumber);
 		return outputTool;
 	}
 	else
 	{
 		int randIndex;
 		size_t maxIndex = knowledgeBase.size() - 1;
-		randIndex = rand()%(static_cast<int>(maxIndex) - 0 + 1) + 0 //random index in knowledgeBase
+		randIndex = rand()%(static_cast<int>(maxIndex) - 0 + 1) + 0; //random index in knowledgeBase
 		outputTool = knowledgeBase[randIndex];
 		
 		//Opposite tool selection
@@ -170,7 +160,7 @@ char RPSGame::nextAIMove(int inputRound)
 			 and computer tool selection. Prints results of each round. 
 * **************************************************************************************************/
 
-void RPSGame::playGame();
+void RPSGame::playGame()
 {
 	screenClear();
 	int currentRound = 1;
@@ -182,26 +172,27 @@ void RPSGame::playGame();
 	int tempUserChoice;
 	char tempRoundResult;
 	//starting new game text
-	while(gameRun)
+	while (gameRun)
 	{
-		cout << "Round " << currentRound << endl << endl;
+		cout << "Round " << currentRound << endl;
 		tempUserChoice = choiceMenu();
 		if (tempUserChoice == 4)
 		{
 			screenClear();
 			gameRun = false;	
 			cout << "Game ending..." << endl;
-			cout << endl << "Final Score:      You: " << humanWins << "  Computer: " << computerWins << endl;
-			cout << endl << "Press enter to go back to main menu " < endl;
+			cout << "Final Score:      You: " << humanWins << "  Computer: " << computerWins << endl;
+			cout << "Press enter to go back to main menu " << endl;
 			screenContinue();
 		}
 		else 
 		{
 			humanTool = buildHumanTool(choiceToTool(tempUserChoice));
 			computerTool = buildComputerTool(nextAIMove(currentRound));
-			knowledgeBase.append(choiceToTool(tempUserChoice)); // can also use humanTool.getType()
-			
-			tempRoundResult = humanTool->fight(computerTool);
+			knowledgeBase.push_back(choiceToTool(tempUserChoice)); // can also use humanTool.getType()
+
+            cout << humanTool->getLongType() << " vs " << computerTool->getLongType() << endl;
+			tempRoundResult = humanTool->fight(*computerTool);
 			
 			if (tempRoundResult == 'w')
 			{
@@ -217,47 +208,20 @@ void RPSGame::playGame();
 			{
 				ties++;
 			}
-			
-			printRoundResult(tempRoundResult);
+
+            printRoundResult(tempRoundResult);
 			cout << endl << "Current Score:      You: " << humanWins << "  Computer: " << computerWins << endl;
-			
+
 			currentRound++;
 			delete humanTool;
 			delete computerTool;
-			cout << endl << "Press enter to begin next round" << endl;
 			screenContinue();
-			screenClear();
+			//screenClear();
+
+            std::this_thread::sleep_for(sleepDuration);
 		}
 	}
 }
-
-/***************************************************************************************************
-* printRoundResult - Prints outcome of current round
-* **************************************************************************************************/
-
-void RPSGame::printRoundResult(char inputResult)
-{
-	switch(inputResult)
-	{
-		case 'w':
-		{	
-			cout << "You win!" << endl;
-			break;
-		}
-		case 'l':
-		{	
-			cout << "Computer wins!" << endl;
-			break;
-		}
-		case 't':
-		{	
-			cout << "Tie." << endl;
-		}	
-	}	
-}
-
-
-
 
 /***************************************************************************************************
 * choiceMenu - Interfaces user to pick a tool (1-3) or quit (4)
@@ -265,7 +229,6 @@ void RPSGame::printRoundResult(char inputResult)
 int RPSGame::choiceMenu()
 {
 
-        bool runChoice = true;
         int userChoice;
 
         cout << "Choose an option below: " << endl << endl;
@@ -280,12 +243,16 @@ int RPSGame::choiceMenu()
 }
 
 
+
+
+
 /***************************************************************************************************
 * mainMenu - Interfaces user to start a new game, modify tool settings, and quit
 * **************************************************************************************************/
 
 void RPSGame::mainMenu()
 {
+
         bool runMain = true;
         int mainInput;
 
@@ -328,166 +295,193 @@ void RPSGame::mainMenu()
 					is a sub-menu for the human and computer tools.
 * **************************************************************************************************/
 
-void RPSGame::toolSettingsMenu()
-{
-        bool runToolSettings = true;
-        int settingsInput;
+void RPSGame::toolSettingsMenu() {
+    bool runToolSettings = true;
+    int settingsInput;
 
-        while (runToolSettings)
-        {
-                screenClear();
-                cout << "Tool Settings Menu" << endl << endl;
-                cout << "1) Human Tool Strength" << endl;
-		cout << "2) Computer Tool Strength" << endl;
-		cout << "3) Back to main menu" << endl;
-                
-		//cout << "X) Tempo - (" << getTempo() << " seconds)" << endl;     If we want to add tempo between rounds
+    while (runToolSettings) {
+        screenClear();
+        cout << "Tool Settings Menu" << endl << endl;
+        cout << "1) Human Tool Strength" << endl;
+        cout << "2) Computer Tool Strength" << endl;
+        cout << "3) Back to main menu" << endl;
 
-                cout << "Enter option (1-3): ";
-                cin >> settingsInput;
-                settingsInput = validateBetween(settingsInput, 1, 5);
-                
-		switch (settingsInput)
-                {
-                case 1: //Human tool Strength
-                {
-                	   bool humanToolSettingsRun = true;
-			   int tempUserChoice;
-					   
-			   while(humanToolSettingsRun)
-			   {
-				screenClear();
-				cout << "Human tool strength settings" << endl << endl;
-				cout << "1) Rock strength:  " << humanRockStrength << endl;
-				cout << "2) Paper strength: " << humanPaperStrength << endl;
-				cout << "3) Scissor strength: " << humanScissorStrength << endl;
-				cout << "4) Back to Tool settings menu" << endl;
-				cout << endl << endl << "Enter 1-4: ";
-				cin  >> tempUserChoice;
-				tempUserChoice = validateBetween(tempUserChoice, 1, 3);
-				switch (tempUserChoice)
-				{
-				case 1: // Set Human rock strength
-				{
-					cout << endl << "Enter new rock strength: " 
-					cin >> humanRockStrength;
-					humanRockStrength = validateBetween(1, maxStrength);
-					break;
-				}
-				case 2: // Set Human paper strength
-				{
-					cout << endl << "Enter new paper strength: " 
-					cin >> humanPaperStrength;
-					humanPaperStrength = validateBetween(1, maxStrength);
-					break;
-				}
-				case 3: // Set Human scissor strength
-				{
-					cout << endl << "Enter new scissor strength: " 
-					cin >> humanScissorStrength;
-					humanScissorStrength = validateBetween(1, maxStrength);
-					break;
-				}
-				case 4:
-				{
-					humanToolSettingsRun = false;
-				}
-				}
-			   }
-			   break;
-				}
-					   
-		case 2: //Computer tool Strength
-		 {
-			  bool computerToolSettingsRun = true;
-			  int tempUserChoice;
+        //cout << "X) Tempo - (" << getTempo() << " seconds)" << endl;     If we want to add tempo between rounds
+
+        cout << "Enter option (1-3): ";
+        cin >> settingsInput;
+        settingsInput = validateBetween(settingsInput, 1, 3);
+
+        switch (settingsInput) {
+            case 1: //Human tool Strength
+            {
+                bool humanToolSettingsRun = true;
+                int tempUserChoice;
 
 
-			   while(computerToolSettingsRun)
+                while (humanToolSettingsRun) {
+                    screenClear();
+                    cout << "Human tool strength settings" << endl << endl;
+                    cout << "1) Rock strength:  " << humanRockStrength << endl;
+                    cout << "2) Paper strength: " << humanPaperStrength << endl;
+                    cout << "3) Scissor strength: " << humanScissorStrength << endl;
+                    cout << "4) Back to Tool settings menu" << endl;
+                    cout << endl << endl << "Enter 1-4: ";
+                    cin >> tempUserChoice;
+                    tempUserChoice = validateBetween(tempUserChoice, 1, 4);
+                    int tempStrength = 0;
+                    switch (tempUserChoice) {
+                        case 1: // Set Human rock strength
+                        {
+                            cout << endl << "Enter new rock strength: ";
+                            cin >> tempStrength;
+                            humanRockStrength = validateBetween(tempStrength, 1, maxStrength);
+                            break;
+                        }
+                        case 2: // Set Human paper strength
+                        {
+                            cout << endl << "Enter new paper strength: ";
+                            cin >> humanPaperStrength;
+                            humanPaperStrength = validateBetween(tempStrength, 1, maxStrength);
+                            break;
+                        }
+                        case 3: // Set Human scissor strength
+                        {
+                            cout << endl << "Enter new scissor strength: ";
+                            cin >> humanScissorStrength;
+                            humanScissorStrength = validateBetween(tempStrength, 1, maxStrength);
+                            break;
+                        }
+                        case 4: {
+                            humanToolSettingsRun = false;
+                        }
+                    }
+                }
+                break;
+            }
 
-			   {
-					screenClear();
-					cout << "Computer tool strength settings" << endl << endl;
-					cout << "1) Rock strength:  " << computerRockStrength << endl;
-					cout << "2) Paper strength: " << computerPaperStrength << endl;
-					cout << "3) Scissor strength: " << computerScissorStrength << endl;
-					cout << "4) Back to Tool settings menu" << endl;
-					cout << endl << endl << "Enter 1-4: ";
-					cin  >> tempUserChoice;
-					tempUserChoice = validateBetween(tempUserChoice, 1, 3);
-					switch (tempUserChoice)
-					{
-					case 1: // Set Computer rock strength
-					{
-						cout << endl << "Enter new rock strength: " 
-						cin >> computerRockStrength;
-						computerRockStrength = validateBetween(1, maxStrength);
-						break;
-					}
-					case 2: // Set Computer paper strength
-					{
-						cout << endl << "Enter new paper strength: " 
-						cin >> computerPaperStrength;
-						computerPaperStrength = validateBetween(1, maxStrength);
-						break;
-					}
-					case 3: // Set Computer scissor strength
-					{
-						cout << endl << "Enter new scissor strength: " 
-						cin >> computerScissorStrength;
-						computerScissorStrength = validateBetween(1, maxStrength);
-						break;
-					}
-					case 4:
-					{
-						computerToolSettingsRun = false;
-					}
-					}
-			   }
-			   break;
-			}
-		case 3:
-		{
-			runToolSettings = false;
-		}
-		}
-}
-					
-int RPSGame::validateBetween(int inputNumber, int validMin, int validMax)
-{
-        while ((cin.fail() || inputNumber < validMin || inputNumber > validMax))
-        {
-                cin.clear();
-                cin.ignore(1000, '\n');
-                cout << "Please enter a valid integer >= " << validMin << " or <=  " << validMax << " : " << endl;
-                cin >> inputNumber;
+            case 2: //Computer tool Strength
+            {
+                bool computerToolSettingsRun = true;
+                int tempUserChoice;
+
+
+                while (computerToolSettingsRun) {
+                    screenClear();
+                    cout << "Computer tool strength settings" << endl << endl;
+                    cout << "1) Rock strength:  " << computerRockStrength << endl;
+                    cout << "2) Paper strength: " << computerPaperStrength << endl;
+                    cout << "3) Scissor strength: " << computerScissorStrength << endl;
+                    cout << "4) Back to Tool settings menu" << endl;
+                    cout << endl << endl << "Enter 1-4: ";
+                    cin >> tempUserChoice;
+                    tempUserChoice = validateBetween(tempUserChoice, 1, 4);
+                    int tempStrength = 0;
+                    switch (tempUserChoice) {
+                        case 1: // Set Computer rock strength
+                        {
+                            cout << endl << "Enter new rock strength: ";
+                            cin >> computerRockStrength;
+                            computerRockStrength = validateBetween(tempStrength, 1, maxStrength);
+                            break;
+                        }
+                        case 2: // Set Computer paper strength
+                        {
+                            cout << endl << "Enter new paper strength: ";
+                            cin >> computerPaperStrength;
+                            computerPaperStrength = validateBetween(tempStrength, 1, maxStrength);
+                            break;
+                        }
+                        case 3: // Set Computer scissor strength
+                        {
+                            cout << endl << "Enter new scissor strength: ";
+                            cin >> computerScissorStrength;
+                            computerScissorStrength = validateBetween(tempStrength, 1, maxStrength);
+                            break;
+                        }
+                        case 4: {
+                            computerToolSettingsRun = false;
+                        }
+                    }
+                }
+                break;
+            }
+            case 3: {
+                runToolSettings = false;
+            }
         }
-        return inputNumber;
+    }
+}
+
+int RPSGame::validateBetween(int inputNumber, int validMin, int validMax) {
+    while ((cin.fail() || inputNumber < validMin || inputNumber > validMax)) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Please enter a valid integer >= " << validMin << " or <=  " << validMax << " : " << endl;
+        cin >> inputNumber;
+    }
+    return inputNumber;
+}
+
+/***************************************************************************************************
+* printRoundResult - Prints outcome of current round
+* **************************************************************************************************/
+
+void RPSGame::printRoundResult(char inputResult)
+{
+    switch(inputResult)
+    {
+        case 'w':
+        {
+            cout << "You win!" << endl;
+            break;
+        }
+        case 'l':
+        {
+            cout << "Computer wins!" << endl;
+            break;
+        }
+        case 't':
+        {
+            cout << "Tie." << endl;
+        }
+    }
 }
 
 /***************************************************************************************************
 * screenClear - clears screen based on OS. Made this so I can test on Visual Studio as well
 * **************************************************************************************************/
+void RPSGame::screenClear() {
+    #ifdef __linux__
+            system("clear");
 
-void RPSGame::screenClear()
-{
-#ifdef __linux__
-        system("clear");
-
-#elif _WIN32
-        system("cls");
-#endif
+    #elif _WIN32
+            system("cls");
+    #endif
 }
 
 /***************************************************************************************************
 * screenClear - Prompts press any key to continue based on OS.
 * **************************************************************************************************/
-void RPSGame::screenContinue()
-{
-#ifdef __linux__
-        system("read");
+void RPSGame::screenContinue() {
+    #ifdef __linux__
+            system("read");
 
-#elif _WIN32
-        system("pause");
-#endif
+    #elif _WIN32
+            system("pause");
+    #endif
 }
+
+Tool *RPSGame::getHumanTool() const {
+    return humanTool;
+}
+
+Tool *RPSGame::getComputerTool() const {
+    return computerTool;
+}
+
+void RPSGame::setSleepDuration(int sleepDuration) {
+    std::chrono::seconds sleep(sleepDuration);
+    this->sleepDuration = sleep;
+}
+
