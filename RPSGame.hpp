@@ -4,7 +4,6 @@
 #include "Tool.hpp"
 #include <chrono>
 #include <vector>
-
 using std::vector;
 
 
@@ -19,6 +18,8 @@ class RPSGame
 		int ties;
         std::chrono::seconds sleepDuration;
 		const int maxStrength = 1000000; //arbitrary max
+		const int minStrength = 1;
+
 	public:
 		RPSGame();
 		//RPSGame(const RPSGame);
@@ -39,6 +40,8 @@ class RPSGame
         int validateBetween(int inputNumber, int validMin, int validMax);
 
         void setSleepDuration(int sleepDuration);
+
+
 
 protected:
     int humanRockStrength;
