@@ -220,7 +220,7 @@ void RPSGame::playGame()
 			screenContinue();
 			//screenClear();
 
-            std::this_thread::sleep_for(sleepDuration);
+            //std::this_thread::sleep_for(sleepDuration);
 		}
 	}
 }
