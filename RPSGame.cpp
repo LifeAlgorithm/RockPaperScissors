@@ -345,7 +345,7 @@ void RPSGame::toolSettingsMenu() {
                         case 2: // Set Human paper strength
                         {
                             cout << endl << "Enter new paper strength: ";
-                            cin >> humanPaperStrength;
+                            cin >> tempStrength;
                             humanPaperStrength = validateBetween(tempStrength, 1, maxStrength);
 
                             break;
@@ -353,7 +353,7 @@ void RPSGame::toolSettingsMenu() {
                         case 3: // Set Human scissor strength
                         {
                             cout << endl << "Enter new scissor strength: ";
-                            cin >> humanScissorStrength;
+                            cin >> tempStrength;
                             humanScissorStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
@@ -386,21 +386,21 @@ void RPSGame::toolSettingsMenu() {
                         case 1: // Set Computer rock strength
                         {
                             cout << endl << "Enter new rock strength: ";
-                            cin >> computerRockStrength;
+                            cin >> tempStrength;
                             computerRockStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 2: // Set Computer paper strength
                         {
                             cout << endl << "Enter new paper strength: ";
-                            cin >> computerPaperStrength;
+                            cin >> tempStrength;
                             computerPaperStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 3: // Set Computer scissor strength
                         {
                             cout << endl << "Enter new scissor strength: ";
-                            cin >> computerScissorStrength;
+                            cin >> tempStrength;
                             computerScissorStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
