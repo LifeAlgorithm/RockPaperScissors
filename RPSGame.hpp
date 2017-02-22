@@ -1,6 +1,8 @@
 #ifndef RPSGame_HPP
 #define RPSGame_HPP
+
 #include "Tool.hpp"
+#include <chrono>
 #include <vector>
 
 using std::vector;
@@ -15,29 +17,38 @@ class RPSGame
 		int humanWins;
 		int computerWins;
 		int ties;
-		int humanRockStrength;
-		int humanPaperStrength;
-		int humanScissorStrength;
-		int computerRockStrength;
-		int computerPaperStrength;
-		int computerScissorStrength;
+        std::chrono::seconds sleepDuration;
 		const int maxStrength = 1000000; //arbitrary max
 	public:
 		RPSGame();
 		//RPSGame(const RPSGame);
-		//~RPSGame();
+		virtual ~RPSGame();
 		//RPSGame& operator= (const RPSGame&);
 		void mainMenu();
-		int choiceMenu();
+		virtual int choiceMenu();
 		void toolSettingsMenu();
-		tool* buildHumanTool(char);
-		tool* buildComputerTool(char);
-		char choiceToTool(int);
+		Tool* buildHumanTool(char);
+		Tool* buildComputerTool(char);
+
+        virtual char choiceToTool(int);
 		char nextAIMove(int);
-		void printRoundResult(char);
-		void playGame();
+		virtual void printRoundResult(char);
+		virtual void playGame();
 		void screenClear();
 		void screenContinue();
+        int validateBetween(int inputNumber, int validMin, int validMax);
+
+        void setSleepDuration(int sleepDuration);
+
+protected:
+    int humanRockStrength;
+    int humanPaperStrength;
+    int humanScissorStrength;
+    int computerRockStrength;
+    int computerPaperStrength;
+    int computerScissorStrength;
+    Tool *getHumanTool() const;
+    Tool *getComputerTool() const;
 
 };
 

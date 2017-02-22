@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <thread>
 
+
 using std::vector;
 using std::cout;
 using std::cin;
@@ -59,7 +60,7 @@ Tool* RPSGame::buildHumanTool(char toolSymbol)
 		}
         default:
 		{
-			return new Scissor(humanRockStrength);
+			return new Scissor(humanScissorStrength);
 		}
 	}
 
@@ -83,7 +84,7 @@ Tool* RPSGame::buildComputerTool(char toolSymbol)
 		}
         default:
 		{
-            return new Scissor(computerRockStrength);
+            return new Scissor(computerScissorStrength);
 		}
 	}
 }
@@ -192,6 +193,7 @@ void RPSGame::playGame()
 			knowledgeBase.push_back(choiceToTool(tempUserChoice)); // can also use humanTool.getType()
 
             cout << humanTool->getLongType() << " vs " << computerTool->getLongType() << endl;
+
 			tempRoundResult = humanTool->fight(*computerTool);
 			
 			if (tempRoundResult == 'w')
@@ -218,7 +220,7 @@ void RPSGame::playGame()
 			screenContinue();
 			//screenClear();
 
-            std::this_thread::sleep_for(sleepDuration);
+            //std::this_thread::sleep_for(sleepDuration);
 		}
 	}
 }
@@ -330,12 +332,14 @@ void RPSGame::toolSettingsMenu() {
                     cin >> tempUserChoice;
                     tempUserChoice = validateBetween(tempUserChoice, 1, 4);
                     int tempStrength = 0;
+
                     switch (tempUserChoice) {
                         case 1: // Set Human rock strength
                         {
                             cout << endl << "Enter new rock strength: ";
                             cin >> tempStrength;
                             humanRockStrength = validateBetween(tempStrength, 1, maxStrength);
+
                             break;
                         }
                         case 2: // Set Human paper strength
@@ -343,6 +347,7 @@ void RPSGame::toolSettingsMenu() {
                             cout << endl << "Enter new paper strength: ";
                             cin >> humanPaperStrength;
                             humanPaperStrength = validateBetween(tempStrength, 1, maxStrength);
+
                             break;
                         }
                         case 3: // Set Human scissor strength

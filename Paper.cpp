@@ -20,6 +20,7 @@ Paper::Paper() : Tool()
 {
 	//paper specific
 	this->type = 'p';
+	this->longType = "Paper";
 }
 
 /*********************************************************************
@@ -51,6 +52,7 @@ Paper::Paper(int pStrength) :Tool(pStrength)
 {
 	//paper specific
 	this->setType('p');
+    this->longType = "Paper";
 }
 
 /*********************************************************************

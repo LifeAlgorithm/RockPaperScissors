@@ -11,8 +11,6 @@ specific to the scissor functionality.
 
 // Header files to be included
 #include "Scissor.hpp"
-#include "Tool.hpp"
-#include <iostream>
 
 // Using objects to make life easier
 // Intentionally blank
@@ -30,6 +28,7 @@ Scissor::Scissor() : Tool()
 {
 	// Additional code specific to scissor
 	this->type = 's';
+	this->longType = "Scissor";
 }
 
 /***********************************************
@@ -45,6 +44,7 @@ Scissor::Scissor(int str) : Tool(str)
 {
 	// Additional code specific to scissor
 	this->type = 's';
+    this->longType = "Scissor";
 }
 
 /***********************************************

@@ -19,6 +19,7 @@ Rock::Rock() :Tool()
 {
 	//rock specific
 	this->type = 'r';
+	this->longType = "Rock";
 }
 
 /*********************************************************************
@@ -50,6 +51,7 @@ Rock::Rock(int rStrength): Tool(rStrength)
 {
 	//rock specific
 	this->setType('r');
+    this->longType = "Rock";
 }
 
 /*********************************************************************
