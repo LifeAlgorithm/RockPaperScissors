@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <thread>
 
+
 using std::vector;
 using std::cout;
 using std::cin;
@@ -192,6 +193,7 @@ void RPSGame::playGame()
 			knowledgeBase.push_back(choiceToTool(tempUserChoice)); // can also use humanTool.getType()
 
             cout << humanTool->getLongType() << " vs " << computerTool->getLongType() << endl;
+
 			tempRoundResult = humanTool->fight(*computerTool);
 			
 			if (tempRoundResult == 'w')
@@ -218,7 +220,7 @@ void RPSGame::playGame()
 			screenContinue();
 			//screenClear();
 
-            std::this_thread::sleep_for(sleepDuration);
+            //std::this_thread::sleep_for(sleepDuration);
 		}
 	}
 }
@@ -317,7 +319,7 @@ void RPSGame::toolSettingsMenu() {
             {
                 bool humanToolSettingsRun = true;
                 int tempUserChoice;
-
+                //maxStrength = 999;
 
                 while (humanToolSettingsRun) {
                     screenClear();
@@ -330,25 +332,28 @@ void RPSGame::toolSettingsMenu() {
                     cin >> tempUserChoice;
                     tempUserChoice = validateBetween(tempUserChoice, 1, 4);
                     int tempStrength = 0;
+
                     switch (tempUserChoice) {
                         case 1: // Set Human rock strength
                         {
                             cout << endl << "Enter new rock strength: ";
                             cin >> tempStrength;
                             humanRockStrength = validateBetween(tempStrength, 1, maxStrength);
+
                             break;
                         }
                         case 2: // Set Human paper strength
                         {
                             cout << endl << "Enter new paper strength: ";
-                            cin >> humanPaperStrength;
+                            cin >> tempStrength;
                             humanPaperStrength = validateBetween(tempStrength, 1, maxStrength);
+
                             break;
                         }
                         case 3: // Set Human scissor strength
                         {
                             cout << endl << "Enter new scissor strength: ";
-                            cin >> humanScissorStrength;
+                            cin >> tempStrength;
                             humanScissorStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
@@ -381,21 +386,21 @@ void RPSGame::toolSettingsMenu() {
                         case 1: // Set Computer rock strength
                         {
                             cout << endl << "Enter new rock strength: ";
-                            cin >> computerRockStrength;
+                            cin >> tempStrength;
                             computerRockStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 2: // Set Computer paper strength
                         {
                             cout << endl << "Enter new paper strength: ";
-                            cin >> computerPaperStrength;
+                            cin >> tempStrength;
                             computerPaperStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
                         case 3: // Set Computer scissor strength
                         {
                             cout << endl << "Enter new scissor strength: ";
-                            cin >> computerScissorStrength;
+                            cin >> tempStrength;
                             computerScissorStrength = validateBetween(tempStrength, 1, maxStrength);
                             break;
                         }
