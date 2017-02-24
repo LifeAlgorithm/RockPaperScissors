@@ -145,7 +145,7 @@ char RPSGame::nextAIMove(int inputRound)
 		}
 		else if (outputTool == 'r')
 		{
-			outputTool = 's';
+			outputTool = 'p';
 		}
 		else //output tool = 'p'
 		{
