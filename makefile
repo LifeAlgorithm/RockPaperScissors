@@ -24,13 +24,12 @@ LDFLAGS =
 TOPPRG = playgame
 ZIPID = GroupProj_Team10.zip
 
-MENU_OBJS       = chewsValidation_v5.o play_game.o Menu.o
+MENU_OBJS       = play_game.o
 OBJS            = Tool.o Rock.o Paper.o Scissor.o RPSGame.o
 
-MENU_SRCS       = chewsValidation_v5.cpp play_game.cpp Menu.cpp
+MENU_SRCS       = play_game.cpp
 SRCS            = Tool.cpp Rock.cpp Paper.cpp Scissor.cpp RPSGame.cpp
 
-MENU_HEADERS    = chewsValidation_v5.hpp Menu.hpp
 HEADERS         = Tool.hpp Rock.hpp Paper.hpp Scissor.hpp RPSGame.hpp
 
 UTILTXT         = Menu_StartOpts.txt Menu_PlayOpts.txt
@@ -39,7 +38,7 @@ UTILTXT         = Menu_StartOpts.txt Menu_PlayOpts.txt
 #target: dependencies
 #	rule to build  (must be TAB line item after target line)
 
-${TOPPRG}: ${OBJS} ${MENU_OBJS} ${HEADERS} ${MENU_HEADERS}
+${TOPPRG}: ${OBJS} ${MENU_OBJS} ${HEADERS}
 	${CXX} ${LDFLAGS} ${OBJS} ${MENU_OBJS} -o ${TOPPRG}
 
 ${OBJS}: ${SRCS}

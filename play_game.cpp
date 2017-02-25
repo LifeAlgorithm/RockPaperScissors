@@ -22,15 +22,7 @@
 **    remove them.)
 ****************************************************************/
 
-
-
-
-//(2/18/17) - Note to testers, I commented out Sam's old code at the bottom if we want to revisit. I also 
-//                 got rid of screenClear() since it is in RPSGame(). The uncommented code should be our main - Armand
-
-
-
-#include "RPSGame.hpp" //I think this is all we need
+#include "RPSGame.hpp"
 
 int main()
 {
@@ -40,45 +32,3 @@ int main()
 	
 }
 
-
-//Old code below
-/* 
-
-#include <iostream>
-#include "RPSGame.hpp"
-
-//Function Prototypes
-void printHeader();
-
-int main()
-{
-    printHeader();
-    RPSGame rpsGame;
-    rpsGame.setSleepDuration(1);
-    rpsGame.mainMenu();
-	return 0;
-}
-
-
-//Utility Function to print Program Header to screen
-void printHeader()
-{
-	//Print Program Information
-	std::cout << "CS162_400_W2017 GroupProject - Paper, Rock, Scissors\n";
-	std::cout << "\nGroup Members\n";
-	std::cout << "  Sam Chew 933191613\n";
-	std::cout << "  Riley Harrison\n";
-	std::cout << "  Patrick Huarng\n";
-	std::cout << "  Susan Onesky\n";
-	std::cout << "  Armand Parajon\n";
-	std::cout << "  Peter Yetti\n";
-	std::cout << "  Nathan Zimmerman\n";
-	std::cout << "\n";
-	std::cout << "This program will allow the user to play Paper, Rock, Scissors with the PC.\n";
-	std::cout << "\n";
-	std::cout << "To begin, the user may select to play either default strengths or custom strengths.\n";
-	std::cout << "After tool strengths are established, the user will follow instructions to play.\n";
-	std::cout << std::endl;
-}
-
-*/
