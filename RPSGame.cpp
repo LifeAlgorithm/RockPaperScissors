@@ -183,7 +183,7 @@ void RPSGame::playGame()
 			computerTool = buildComputerTool(nextAIMove(currentRound));
 			knowledgeBase.push_back(choiceToTool(tempUserChoice)); // can also use humanTool.getType()
 
-			cout << humanTool->getLongType() << " vs " << computerTool->getLongType() << endl;
+			cout << humanTool->getLongType() << " (HU) vs " << computerTool->getLongType() << " (PC)" << endl;
 
 			tempRoundResult = humanTool->fight(*computerTool);
 
