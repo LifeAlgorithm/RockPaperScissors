@@ -7,7 +7,6 @@
 #include <cstdlib>
 #include <thread>
 
-
 using std::vector;
 using std::cout;
 using std::cin;
@@ -18,13 +17,9 @@ using std::time;
 using std::system;
 using std::size_t;
 
-//using std::this_thread::sleep_for; use if want to add duration/tempo between rounds + steps
-
-
 /***************************************************************************************************
 * Default Constructor - Sets default strengths and sets randomization
 * **************************************************************************************************/
-
 RPSGame::RPSGame()
 {
 	humanPaperStrength = 100;
@@ -40,12 +35,14 @@ RPSGame::RPSGame()
 	srand(time(0));
 }
 
+/***************************************************************************************************
+* Destructor for RPSGame class.
+* **************************************************************************************************/
 RPSGame::~RPSGame() {}
 
 /***************************************************************************************************
 * buildComputerTool - Dynamically creates new human tool based on tool input
 * **************************************************************************************************/
-
 Tool* RPSGame::buildHumanTool(char toolSymbol)
 {
 	switch (toolSymbol)
@@ -69,7 +66,6 @@ Tool* RPSGame::buildHumanTool(char toolSymbol)
 /***************************************************************************************************
 * buildComputerTool - Dynamically creates new computer tool based on tool input
 * **************************************************************************************************/
-
 Tool* RPSGame::buildComputerTool(char toolSymbol)
 {
 	switch (toolSymbol)
@@ -93,8 +89,6 @@ Tool* RPSGame::buildComputerTool(char toolSymbol)
 * choiceToTool - Converts integer to tool symbol. 1 = rock, 2 = paper, 3 = scissor. Works in
 accordance with choiceMenu() and nextAIMove() (during random selection)
 * **************************************************************************************************/
-
-
 char RPSGame::choiceToTool(int inputChoice)
 {
 	switch (inputChoice)
@@ -120,7 +114,6 @@ randomly choose amongst tools stored in knowledgeBase, and pick the opposite too
 This punishes the user for picking one tool more frequently than the others,
 whilst maintaining an element of randomness.
 * **************************************************************************************************/
-
 char RPSGame::nextAIMove(int inputRound)
 {
 	char outputTool;
@@ -160,7 +153,6 @@ char RPSGame::nextAIMove(int inputRound)
 * playGame - Interfaces user to play a game. Loops until user quits. Manages user tool selection
 and computer tool selection. Prints results of each round.
 * **************************************************************************************************/
-
 void RPSGame::playGame()
 {
 	screenClear();
@@ -183,8 +175,7 @@ void RPSGame::playGame()
 			gameRun = false;
 			cout << "Game ending..." << endl;
 			cout << "Final Score:      You: " << humanWins << "  Computer: " << computerWins << endl;
-			cout << "Press enter to go back to main menu " << endl;
-			screenContinue();
+			std::this_thread::sleep_for(sleepDuration);
 		}
 		else
 		{
@@ -217,10 +208,6 @@ void RPSGame::playGame()
 			currentRound++;
 			delete humanTool;
 			delete computerTool;
-			//screenContinue();
-			//screenClear();
-
-			//std::this_thread::sleep_for(sleepDuration);
 		}
 	}
 }
@@ -230,7 +217,6 @@ void RPSGame::playGame()
 * **************************************************************************************************/
 int RPSGame::choiceMenu()
 {
-
 	int userChoice;
 
 	cout << "Choose an option below: " << endl;
@@ -244,22 +230,17 @@ int RPSGame::choiceMenu()
 	return userChoice;
 }
 
-
-
-
-
 /***************************************************************************************************
 * mainMenu - Interfaces user to start a new game, modify tool settings, and quit
 * **************************************************************************************************/
-
 void RPSGame::mainMenu()
 {
-
 	bool runMain = true;
 	int mainInput;
 
 	while (runMain)
 	{
+
 		screenClear();
 		cout << "Welcome to Rock Paper Scissors! " << "Choose an option below: " << endl << endl;
 		cout << "1) Start New Game" << endl;
@@ -296,7 +277,6 @@ void RPSGame::mainMenu()
 * toolSettingsMenu - Interfaces user to modify strengths of the computer and human tools. There
 is a sub-menu for the human and computer tools.
 * **************************************************************************************************/
-
 void RPSGame::toolSettingsMenu() {
 	bool runToolSettings = true;
 	int settingsInput;
@@ -418,6 +398,9 @@ void RPSGame::toolSettingsMenu() {
 	}
 }
 
+/***************************************************************************************************
+* Input validation. Takes three integers representing the input to validate and the min max range.
+* **************************************************************************************************/
 int RPSGame::validateBetween(int inputNumber, int validMin, int validMax) {
 	while ((cin.fail() || inputNumber < validMin || inputNumber > validMax)) {
 		cin.clear();
@@ -431,7 +414,6 @@ int RPSGame::validateBetween(int inputNumber, int validMin, int validMax) {
 /***************************************************************************************************
 * printRoundResult - Prints outcome of current round
 * **************************************************************************************************/
-
 void RPSGame::printRoundResult(char inputResult)
 {
 	switch (inputResult)

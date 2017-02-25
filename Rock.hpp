@@ -9,8 +9,7 @@
 #define ROCK_HPP
 
 #include "Tool.hpp"
-class Rock :
-	public Tool
+class Rock : public Tool
 {
 public:
 	//default constructor
@@ -23,7 +22,6 @@ public:
 	Rock(int);
 	//overloaded assignment operator
 	void operator = (const Rock&);
-
 	//overridden fight function
 	char fight(Tool&);
 };

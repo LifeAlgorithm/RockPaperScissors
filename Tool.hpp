@@ -12,6 +12,11 @@
 
 class Tool
 {
+protected:
+	int strength;
+	char type;
+	std::string longType;
+
 public:
 	//default constructor
 	Tool();
@@ -39,11 +44,6 @@ public:
 	virtual char fight(Tool&) = 0;
 
     const std::string &getLongType() const;
-
-protected:
-	int strength;
-	char type;
-	std::string longType;
 };
 
 #endif // !TOOL_HPP
