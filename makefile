@@ -71,6 +71,6 @@ ${IT_TEST_OBJS}: ${IT_TEST_SRCS}
 
 .PHONY : testsClean
 testsClean :
-	rm ${IT_TESTS_EXE} ${TEST_OBJS} ${OBJS}
+	rm ${IT_TESTS_EXE} ${IT_TEST_OBJS} ${OBJS}
 
 ##### END TESTING #####
