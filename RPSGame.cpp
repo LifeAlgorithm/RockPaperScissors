@@ -1,3 +1,10 @@
+/**********************************************************************
+**Program Name:		RPS Game
+**Author:			Group 10
+**Date:				2/18/17
+**Description:		The RPSGame class implementation file
+**********************************************************************/
+
 #include "Rock.hpp"
 #include "Paper.hpp"
 #include "Scissor.hpp"

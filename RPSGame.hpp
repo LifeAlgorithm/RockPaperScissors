@@ -1,3 +1,16 @@
+/**********************************************************************
+**Program Name:		RPS Game
+**Author:			Group 10
+**Date:				2/18/17
+**Description:		RPSGame class header file.  Represenents and abstraction
+of a rock paper scissors game.  Allows a user to play against a computer.
+To use the class simply create an object using the default constructor
+and call the mainMenu function.  Menu functions allow tool strengths to be
+set, and new games to be initiated.  Get functions return values that are
+then printed to the screen to display score, tool choices, and strength
+settings.
+**********************************************************************/
+
 #ifndef RPSGame_HPP
 #define RPSGame_HPP
 

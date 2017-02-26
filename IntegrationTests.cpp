@@ -1,7 +1,12 @@
 /************************************************************************
 Author: GROUP 10
+Program name: integrationTest
 Date:  2/18/17
-Description: Unit tests for selected functions
+Description: This file contains unit tests for selected functions.  No
+functions needed to run the main program are housed in this file.  This file
+is run under a separate executable.  Prints failure statement if a tested 
+function returns a value that is unexpected.  Requires user to use 
+'make integrationTest' to run.
 *************************************************************************/
 #include <iostream>
 #include "RPSGame.hpp"
@@ -15,6 +20,11 @@ using std::endl;
 #define FAILED cout << "!!!! FAILED !!!!! ";
 #define PASSED cout << "Passed: ";
 
+/*********************************************************************
+** Description: Test class for RPSGame class. Used to create test
+values and check whether or not the RPSGame class functions are returning
+expected values.
+*********************************************************************/
 class RPSGameStub : public RPSGame {
 public:
     int exit, count = 0, result = 0;
@@ -38,6 +48,8 @@ public:
         return rand()%(3-1+1)+1;
     }
 
+    // function to set strength and type values to check using the
+    // print round result statements.
     void setNewStrength(int player, int type, int value) {
         strengthChanged = true;
         switch (player) {
@@ -69,6 +81,8 @@ public:
         }
     }
 
+    // Function to print failure statement in the event that a function
+    // returns an unexpected value.
     void printRoundResult(char result) override {
         if (strengthChanged) {
             return;
@@ -145,6 +159,11 @@ public:
     }
 };
 
+/*********************************************************************
+** Description: Function to check output of fight function.  Usees
+default strength values.  Uses conditionals to print a failure statement
+if a value is returned from the fight function that is not expected.
+*********************************************************************/
 int testDefaultStrenghtFights() {
     Scissor* scissor = new Scissor(100);
     Rock* rock = new Rock(100);
@@ -220,6 +239,11 @@ int testDefaultStrenghtFights() {
     return result;
 }
 
+/*********************************************************************
+** Description: Creates an test rpsGame object and sets values to
+default.  Calls functions to play a round.  Using print functions
+will return a failure print message if an unexpected value is returned.
+*********************************************************************/
 int testRPSGameDefaultStrength() {
     cout << endl;
     RPSGameStub* rpsGame = new RPSGameStub(5);
@@ -234,6 +258,10 @@ int testRPSGameDefaultStrength() {
     return result;
 }
 
+/*********************************************************************
+** Description: Creates the test class object and uses member functions
+to set test values.
+*********************************************************************/
 int testRPSGame() {
     cout << endl;
     RPSGameStub* rpsGame = new RPSGameStub(5);
@@ -245,6 +273,10 @@ int testRPSGame() {
     return result;
 }
 
+/*********************************************************************
+** Description: Tests default values, non default values and menu
+return values to ensure that expected values are returned.
+*********************************************************************/
 int main() {
 
     return testDefaultStrenghtFights() + testRPSGameDefaultStrength() + testRPSGame();

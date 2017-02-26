@@ -14,7 +14,7 @@
 Tool::Tool()
 {
 	//sets values to default 0 and space.
-	this->setStrength(0);
+	this->setStrength(1);
 	this->setType(' ');
 }
 

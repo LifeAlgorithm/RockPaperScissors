@@ -53,7 +53,7 @@ clean :
 
 .PHONY : zip
 zip :
-	zip -D ${ZIPID} ${HEADERS} ${SRCS} ${UTILTXT} makefile
+	zip -D ${ZIPID} ${HEADERS} ${SRCS} ${UTILTXT} ${MENU_SRCS} *.pdf makefile
 
 
 ##### INTEGRATION TESTING #####
