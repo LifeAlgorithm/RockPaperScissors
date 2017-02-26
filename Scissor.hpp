@@ -14,6 +14,10 @@ specific to the scissor functionality.
 
 // Include libraries
 #include "Tool.hpp"
+#include <iostream>
+
+using std::cout;
+using std::endl;
 
 // Class definitions
 class Scissor : public Tool
