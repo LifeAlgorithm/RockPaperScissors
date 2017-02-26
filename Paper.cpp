@@ -102,8 +102,8 @@ char Paper::fight(Tool &toolIn)
 		outcome = compareStrength(tempPaperStrength, tempToolInStrength); //no temporary modifiers, compare
 	}
 
-	cout << this->longType << " strength: " << this->strength << " (" << tempPaperStrength << ")" << endl;
-	cout << toolIn.getLongType() << " strength: " << toolIn.getStrength() << " (" << tempToolInStrength << ")"  << endl;
+	cout << this->longType << " strength: " << this->strength << " (temp: " << tempPaperStrength << ")" << endl;
+	cout << toolIn.getLongType() << " strength: " << toolIn.getStrength() << " (temp: " << tempToolInStrength << ")"  << endl;
 
 	return outcome;
 }
