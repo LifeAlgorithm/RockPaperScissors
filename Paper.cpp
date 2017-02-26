@@ -81,9 +81,6 @@ char Paper::fight(Tool &toolIn)
 	int tempPaperStrength = this->strength;
 	int tempToolInStrength = toolIn.getStrength();
 
-	cout << "object 1 strength: " << tempPaperStrength << endl;
-	cout << "object 2 strength: " << tempToolInStrength << endl;
-
 	char outcome;
 
 	//Paper vs Rock
@@ -104,6 +101,9 @@ char Paper::fight(Tool &toolIn)
 	else {
 		outcome = compareStrength(tempPaperStrength, tempToolInStrength); //no temporary modifiers, compare
 	}
+
+	cout << this->longType << " strength: " << this->strength << " (temp: " << tempPaperStrength << ")" << endl;
+	cout << toolIn.getLongType() << " strength: " << toolIn.getStrength() << " (temp: " << tempToolInStrength << ")"  << endl;
 
 	return outcome;
 }
