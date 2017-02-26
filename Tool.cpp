@@ -13,7 +13,7 @@
 *********************************************************************/
 Tool::Tool()
 {
-	//sets values to default 0 and space.
+	//sets values to default 1 and space.
 	this->setStrength(1);
 	this->setType(' ');
 }
