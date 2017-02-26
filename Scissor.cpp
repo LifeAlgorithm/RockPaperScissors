@@ -125,8 +125,8 @@ char Scissor::fight(Tool &toolIn)
 	outcome = compareStrength(tempScissorStr,
 		tempToolStr);
 
-	cout << this->longType << " strength: " << this->strength << " (" << tempScissorStr << ")" << endl;
-	cout << toolIn.getLongType() << " strength: " << toolIn.getStrength() << " (" << tempToolStr << ")"  << endl;
+	cout << this->longType << " strength: " << this->strength << " (temp: " << tempScissorStr << ")" << endl;
+	cout << toolIn.getLongType() << " strength: " << toolIn.getStrength() << " (temp: " << tempToolStr << ")"  << endl;
 
 	// Return variable
 	return outcome;
